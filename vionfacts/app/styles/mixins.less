@@ -1,0 +1,19 @@
+.blur(@val){
+	filter: blur(@val); /* Someday, sigh ... */ 
+	-webkit-filter: blur(@val); /* Prefixed CSS3 blur filters */
+	-moz-filter: blur(@val); 
+	-o-filter: blur(@val); 
+	-ms-filter: blur(@val); 
+}
+.extend(){
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+.drop-shadow(@x-axis: 0, @y-axis: 1px, @blur: 2px, @color: #000) {
+  -webkit-box-shadow: @x-axis @y-axis @blur @color;
+  -moz-box-shadow: @x-axis @y-axis @blur @color;
+  box-shadow: @x-axis @y-axis @blur @color;
+}

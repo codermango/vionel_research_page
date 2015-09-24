@@ -1,0 +1,83 @@
+<div class="media">
+    <div class="menu">
+        <a class="menu__item" href="/#/">HOME</a>
+    </div>
+    <div class="media-top">
+        <div class="media-top__blured blured" style="background-image: url({{mediaData.Posterurl}})"></div>
+        
+        <div class="media-top__poster poster" style="background-image: url({{mediaData.Posterurl}})">
+            <div class="poster__border"></div>
+        </div>
+        <div class="media-top__info">
+            <h1 class="media-top__info__title">{{mediaData.BisicInfo.Title}}</h1>
+            <ul class="tags">
+                <li class="tags__tag" ng-repeat="tag in tags">{{tag}}</li><!--
+                --><li class="tags__tag" ng-repeat="(key, data) in mediaData.Environment" style="text-transform: capitalize;">{{key}}: {{data * 100 | number:0}}%</li><!--
+                --><li class="tags__tag">Speed: {{mediaData.Speed}}</li><!--
+                --><li class="tags__tag">Conversation: {{mediaData.Conversation * 100 | number:0}}%</li>
+            </ul>
+            <div class="pies"></div>
+        </div>
+    </div>
+
+    <div class="media-body">
+
+        <div class="media-section">
+            <h2 class="media-section__title">Media information</h2>
+            <h4 class="media-section__info-title"><span>Released:</span> {{mediaData.BisicInfo.Released}}</h4>
+            <h4 class="media-section__info-title"><span>Language:</span> {{mediaData.BisicInfo.Language}}</h4>
+            <h4 class="media-section__info-title"><span>Director:</span> {{mediaData.BisicInfo.Director}}</h4>
+            <h4 class="media-section__info-title"><span>Writer:</span> {{mediaData.BisicInfo.Writer}}</h4>
+            <h4 class="media-section__info-title"><span>Country:</span> {{mediaData.BisicInfo.Country}}</h4>
+            <h4 class="media-section__info-title"><span>Awards:</span> {{mediaData.BisicInfo.Awards}}</h4>
+            <h4 class="media-section__info-title"><span>Rated:</span> {{mediaData.BisicInfo.Rated}}</h4>
+            <h4 class="media-section__info-title"><span>IMDB-Rating:</span> {{mediaData.BisicInfo.imdbRating}}</h4>
+            <h4 class="media-section__info-title"><span>Description:</span> {{mediaData.BisicInfo.Plot}}</h4>
+        </div>
+
+        <div class="media-section">
+
+            <h2 class="media-section__title">Frames</h2>
+            <div ng-if="frameInfo" class="media-section__info">
+
+                <h4 class="media-section__info__title"><span>Brightness:</span> {{frameInfo.Brightness}}</h4>
+                <h4 class="media-section__info__title"><span>Color:</span> {{frameInfo.Color}}</h4>
+                <h4 class="media-section__info__title"><span>DominatingColor:</span> {{frameInfo.DominatingColor}}</h4>
+                <h4 class="media-section__info__title"><span>FrameNumber:</span> {{frameInfo.FrameNumber}}</h4>
+                <h4 class="media-section__info__title"><span>Imgurl:</span> {{frameInfo.Imgurl}}</h4>
+                <h4 class="media-section__info__title"><span>Speed:</span> {{frameInfo.Speed}}</h4>
+                <h4 class="media-section__info__title"><span>Conversation:</span> {{frameInfo.conversation}}</h4>
+
+            </div>
+            <div class="frames">
+                <div class="frames__container" style="width: {{(mediaData.FrameInfo.length * 1) + 300}}px">
+                    
+                    <div class="frames__container__wrap">
+                        <div class="frames__container__wrap__item" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" style="background-color: rgb({{item.Color}}); height: {{mainHeight + item.Speed / 10}}px;"></div>
+                    </div>
+                    <div class="frames__container__wrap">
+                        <div class="frames__container__wrap__item frames__container__wrap__item_conversation" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-class="{'frames__container__wrap__item_conversation_true' : item.conversation == '1'}"></div>
+                    </div>
+                    <div class="frames__container__wrap">
+                        <div class="frames__container__wrap__item frames__container__wrap__item_brightness" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" style="background-color: rgb({{item.Brightness}}, {{item.Brightness}}, {{item.Brightness}})"></div>
+                    </div>
+                    <div class="frames__container__wrap">
+                        <div class="frames__container__wrap__item frames__container__wrap__item_dominatingcolor" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-class="{'frames__container__wrap__item_dominatingcolor_red' : item.DominatingColor == 'R', 'frames__container__wrap__item_dominatingcolor_green' : item.DominatingColor == 'G', 'frames__container__wrap__item_dominatingcolor_blue' : item.DominatingColor == 'B'}"></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="media-section media-section_nodes">
+            <h2 class="media-section__title">Nodes (Bawls)</h2>
+            <div id="nodeInfo" class="media-section__info media-section__info_nodes">
+                <h4 id="index" class="media-section__info__title"></h4>
+                <h4 id="wiki" class="media-section__info__title"></h4>
+                <h4 id="title" class="media-section__info__title"></h4>
+            </div>
+        </div>
+
+    </div>
+</div>

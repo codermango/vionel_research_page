@@ -1,0 +1,266 @@
+/*
+VARIABLES
+************/
+/* PATHS */
+@import "../bower_components/bootstrap/less/bootstrap.less";
+@import "../styles/mixins.less";
+@icon-font-path: "../bower_components/bootstrap/dist/fonts";
+
+/* VALUES */
+@value-text-margin: 5px;
+/* GRID */
+@grid-xl: 40px;
+@grid-lg: 30px;
+@grid-md: 25px;
+@grid-sm: 16px;
+@grid-xs: 12px;
+/* COLOR */
+@color-light: #eeeeee;
+@color-dark: #021420;
+@color-light-contrast: #00385D;
+@color-highlighted-text: #2BA8E2; 
+@color-dark-text: #222;
+@color-dimmed-text: #999999;
+
+/*
+MAIN
+************/
+
+/* BASE */
+h1,h2,h3,h4,p{
+	margin: @value-text-margin 0;
+	font-family: "Lato";
+}
+h1{
+	font-size: 30px;
+}
+h2{
+	font-size: 25px;
+}
+h3{
+	font-size: 20px;
+}
+h4{
+	font-size: 16px;
+}
+body{
+	background-color: @color-dark;
+	color: @color-light;
+}
+
+/* CORE */
+.menu{
+	padding: 2px 10%;
+	&__item{
+		font-size: 16px;
+		&:hover{
+			color: @color-light;
+		}
+	}
+}
+.start{
+	padding: @grid-lg 10%;
+}
+.media{
+
+}
+.media-top{
+	.clearfix();
+	display: table;
+	padding: @grid-xl 10%;
+	background-color: rgba(255, 255, 255, .1);
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+
+	&__blured{
+
+	}
+	&__poster,
+	&__info{
+		display: table-cell;
+		vertical-align: bottom;
+		position: relative;
+	}
+	
+	&__poster{
+	}
+	
+	&__info{
+		position: relative;
+		bottom: -@value-text-margin;
+		padding: 0 @grid-xl;
+		&__title{
+			
+		}
+		&__genres{
+
+		}
+		&__colors{
+			&_gray{}
+			&_dominant{
+
+			}
+		}
+	}
+}
+
+.media-body{
+	padding: @grid-xl 10%;
+}
+
+.media-section{
+	margin-bottom: @grid-xl;
+	&__title{
+		margin-bottom: @grid-md;
+		color: @color-light;
+	}
+	&__info-title{
+		color: @color-dimmed-text;
+		span{
+			display: inline-block;
+			width: 110px;
+			color: @color-highlighted-text;
+			font-weight: 600;
+		}
+	}
+	&__info{
+		color: @color-dark;
+		background-color: fade(@color-light, 80%);
+		padding: @grid-sm @grid-md;
+		border-radius: 2px;
+		display: inline-block;
+		margin-bottom: @grid-md;
+
+		display: inline-block;
+		position: absolute;
+		right: 10%;
+		margin: @grid-xs @grid-xs;
+		&__title{
+			span{
+				font-weight: 600;
+			}
+		}
+		&_nodes{
+			display: none;
+			margin-bottom: 0;
+		}
+	}
+	&_nodes{
+		
+		svg{
+			width: 100%;
+			border-radius: 2px;
+			border: 1px solid rgba(255,255,255,.1);
+			background-color: darken(@color-dark, 3%);
+		}
+	}
+}
+
+.tags{
+	list-style: none;
+	margin: 0 -2px;
+	padding: 0;
+	&__tag{
+		display: inline-block;
+		background-color: @color-highlighted-text;
+		border-radius: 20px;
+		padding: 2px 15px;
+		color: @color-dark;
+		font-weight: 600;
+		margin: 5px 2px;
+	}
+}
+
+.frames{
+	border-radius: 2px;
+	overflow: scroll;
+	background-color: @color-light-contrast;
+	border: 1px solid rgba(255,255,255,.1);
+
+	&__container{
+		padding-right: 300px;
+
+		&__wrap{
+			padding: 5px 0;
+			&__item{
+				display: inline-block;
+				width: 1px;
+				vertical-align: middle;
+				max-height: 200px;
+				min-height: 20px;
+
+				&_conversation{
+					background-color: transparent;
+					&_true{
+						background-color: green;
+					}
+				}
+				&_brightness{
+
+				}
+				&_dominatingcolor{
+					&_red{background-color: red;}
+					&_green{background-color: green}
+					&_blue{background-color: blue}
+				}
+
+				&:hover{
+					background-color: @color-light !important;
+				}
+			}
+		}
+	}
+}
+
+.pies{
+	margin-top: 5px;
+	svg{
+		margin-right: 5px;
+		border: 2px solid @color-light;
+		background-color: @color-light;
+		border-radius: 50%;
+	}
+}
+
+.poster{
+	.drop-shadow(0, 3px, 30px, darken(@color-dark-text, 10%));	
+	border-radius: 2px;
+	width: 200px;
+	height: 300px;
+	background-size: cover;
+	&__border{
+		.extend();
+		border-radius: 2px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+}
+.blured{
+	.extend();
+	.blur(30px);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 60%;
+	opacity: .4;
+}
+
+/* 
+D3 
+************/
+
+.node {
+  stroke: rgba(0, 0, 0, 0.1);
+  // stroke-width: 1.5px;
+  cursor: pointer;
+}
+
+.link {
+  stroke: darken(@color-highlighted-text, 30%);
+  stroke-opacity: .6;
+}
+
+/**/
+
+.arc path {
+  stroke: #fff;
+}
