@@ -1,6 +1,7 @@
 <div class="media">
     <div class="menu">
-        <a class="menu__item" href="/#/">HOME</a>
+        <input type="text" class="form-control">
+        <button id="search" class="btn-primary">Search</button>
     </div>
     <div class="media-top">
         <div class="media-top__blured blured" style="background-image: url({{mediaData.Posterurl}})"></div>
@@ -33,6 +34,22 @@
             <h4 class="media-section__info-title"><span>Rated:</span> {{mediaData.BisicInfo.Rated}}</h4>
             <h4 class="media-section__info-title"><span>IMDB-Rating:</span> {{mediaData.BisicInfo.imdbRating}}</h4>
             <h4 class="media-section__info-title"><span>Description:</span> {{mediaData.BisicInfo.Plot}}</h4>
+        </div>
+
+        <div class="media-section recommendation">
+            <h2 class="media-section__title">Recommendation</h2>
+
+            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.recommendation">
+                <img src="posters/{{ recommendItem.imdbid }}.jpg">
+                <a href="http://www.imdb.com/title/{{ recommendItem.imdbid }}" target="blank">{{ recommendItem.imdbid }}</a>
+                <br>
+                <label>{{ recommendItem.score | number:10 }}</label>
+                <br>
+                <div class="feature" ng-repeat="reason in recommendItem.reason">
+                    <label class="{{reason}}">{{ reason }}</label><br>
+                </div>
+                
+            </div>
         </div>
 
         <div class="media-section">

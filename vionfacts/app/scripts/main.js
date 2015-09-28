@@ -2,16 +2,15 @@
 angular.module('app', ['ngRoute'])
 
 .config(function($routeProvider, $locationProvider) {
-  $routeProvider
-
-  .when('/', {
-    templateUrl: 'start.html',
-    controller: 'StartCtrl'
-  })
-  .when('/media/:jsonLink', {
-    templateUrl: 'media.html',
-    controller: 'MediaCtrl',
-  });
+    $routeProvider
+    .when('/', {
+        templateUrl: 'start.html',
+        controller: 'StartCtrl'
+    })
+    .when('/media/:jsonLink', {
+        templateUrl: 'media.html',
+        controller: 'MediaCtrl',
+    });
 
   // $locationProvider.html5Mode(true);
 })
@@ -22,7 +21,7 @@ Factories & Services
 .factory('webtest', function($q, $timeout, $http) {
     var Webtest = {
         fetch: function(jsonLink) {
-            
+
             var deferred = $q.defer();
             // console.log('callback: ',callback);
             $timeout(function() {
@@ -30,7 +29,6 @@ Factories & Services
                     deferred.resolve(data);
                 });
             }, 30);
-            
             return deferred.promise;
         }
     };
@@ -60,7 +58,7 @@ CONTROLLERS
         $scope.frameInfo = item;
     };
 
-	webtest.fetch('scripts/'+ $routeParams.jsonLink +'.json').then(function(data) {
+	webtest.fetch('data/'+ $routeParams.jsonLink +'.json').then(function(data) {
         $scope.mediaData = data;
         console.log('$scope.mediaData: ', $scope.mediaData);
 
