@@ -6161,7 +6161,7 @@ body {
 .pies svg {
   margin-right: 5px;
   border: 2px solid #eeeeee;
-  background-color: #eeeeee;
+  background-color: transparent;
   border-radius: 50%;
 }
 .poster {
@@ -6221,7 +6221,7 @@ D3
   width: 120px;
   height: 330px;
   text-align: left;
-  margin-right: 5px;
+  margin-right: 27px;
   margin-bottom: 20px;
 }
 .recommendation-box img {

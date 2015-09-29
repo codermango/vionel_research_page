@@ -40,7 +40,7 @@
         <div ng-if="mediaData.Recommendation" class="media-section recommendation">
             <h2 class="media-section__title">Recommendation</h2>
 
-            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.Recommendation | limitTo: 11">
+            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.Recommendation | limitTo: 10">
                 <img src="posters/{{ recommendItem.imdbid }}.jpg">
                 <a href="#/media/{{ recommendItem.imdbid }}">{{ recommendItem.imdbid }}</a>
                 <br>

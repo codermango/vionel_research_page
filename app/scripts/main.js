@@ -96,9 +96,9 @@ CONTROLLERS
         if (conversatioinData[0].value == 0) {
             return;
         }
-        $scope.startPies(RGBData, ["#FF3056", "#4AD663", "#59C7FC", '#eeeeee']);
+        $scope.startPies(RGBData, ["#FF3056", "#4AD663", "#59C7FC", 'transparent']);
         $scope.startPies(BrightnessData, ["#eeeeee", "#222222", "#666666"]);
-        $scope.startPies(conversatioinData, ["green", "white"]);
+        $scope.startPies(conversatioinData, ["green", "transparent"]);
     });
 
     $scope.startNodes = function(jsonObj){
