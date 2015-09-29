@@ -86,13 +86,19 @@ CONTROLLERS
         {"value":data.Brightness.Dark}, 
         {"value":data.Brightness.Medium}
         ];
-        var env = data["Environment"];
-
+        var conversatioinData = [
+        {"value": data.Conversation * 100},
+        {"value": 100 - data.Conversation * 100}
+        ];
         
-        console.log("Environment: ", env);
         console.log('RGBData: ',RGBData);
+        console.log(conversatioinData)
+        if (conversatioinData[0].value == 0) {
+            return;
+        }
         $scope.startPies(RGBData, ["#FF3056", "#4AD663", "#59C7FC", '#eeeeee']);
         $scope.startPies(BrightnessData, ["#eeeeee", "#222222", "#666666"]);
+        $scope.startPies(conversatioinData, ["green", "white"]);
     });
 
     $scope.startNodes = function(jsonObj){
@@ -201,10 +207,10 @@ CONTROLLERS
 
         arcs.append("svg:text")                                     //add a label to each slice
         .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-        //we have to make sure to set these before calling arc.centroid
-        d.innerRadius = 0;
-        d.outerRadius = r;
-        return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+            //we have to make sure to set these before calling arc.centroid
+            d.innerRadius = 0;
+            d.outerRadius = r;
+            return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
         })
         .attr("text-anchor", "middle")                          //center the text on it's origin
         .text(function(d, i) { return data[i].label; });        //get the label from our original data array

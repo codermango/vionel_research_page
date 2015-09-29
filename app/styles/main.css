@@ -6109,6 +6109,15 @@ body {
   font-weight: 600;
   margin: 5px 2px;
 }
+.tags__genre {
+  display: inline-block;
+  background-color: #ee3e97;
+  border-radius: 20px;
+  padding: 2px 15px;
+  color: #021420;
+  font-weight: 600;
+  margin: 5px 2px;
+}
 .frames {
   border-radius: 2px;
   overflow: scroll;

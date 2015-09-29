@@ -13,10 +13,10 @@
         <div class="media-top__info">
             <h1 class="media-top__info__title">{{mediaData.BisicInfo.Title}}</h1>
             <ul class="tags">
-                <li class="tags__tag" ng-repeat="tag in tags">{{tag}}</li><!--
+                <li class="tags__genre" ng-repeat="tag in tags">{{tag}}</li><!--
                 --><li class="tags__tag" ng-repeat="(key, data) in mediaData.Environment" style="text-transform: capitalize;">{{key}}: {{data * 100 | number:0}}%</li><!--
-                --><li class="tags__tag">Speed: {{mediaData.Speed}}</li><!--
-                --><li class="tags__tag">Conversation: {{mediaData.Conversation * 100 | number:0}}%</li>
+                --><li ng-if="mediaData.Speed" class="tags__tag">Speed: {{mediaData.Speed}}</li><!--
+                --><li ng-if="mediaData.Conversation" class="tags__tag">Conversation: {{mediaData.Conversation * 100 | number:0}}%</li>
             </ul>
             <div class="pies"></div>
         </div>
@@ -37,12 +37,12 @@
             <h4 class="media-section__info-title"><span>Description:</span> {{mediaData.BisicInfo.Plot}}</h4>
         </div>
 
-        <div ng-if="mediaData.recommendation" class="media-section recommendation">
+        <div ng-if="mediaData.Recommendation" class="media-section recommendation">
             <h2 class="media-section__title">Recommendation</h2>
 
-            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.recommendation | limitTo: 11">
+            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.Recommendation | limitTo: 11">
                 <img src="posters/{{ recommendItem.imdbid }}.jpg">
-                <a href="http://www.imdb.com/title/{{ recommendItem.imdbid }}" target="blank">{{ recommendItem.imdbid }}</a>
+                <a href="#/media/{{ recommendItem.imdbid }}">{{ recommendItem.imdbid }}</a>
                 <br>
                 <label>{{ recommendItem.score | number:10 }}</label>
                 <br>
@@ -53,23 +53,11 @@
             </div>
         </div>
 
-        <div ng-if="mediaData.FrameInfo" class="media-section">
+        <div ng-if="mediaData.FrameInfo.length != 0" class="media-section">
 
             <h2 class="media-section__title">Frames</h2>
-            <!-- <div ng-if="frameInfo" class="media-section__info">
-
-                <h4 class="media-section__info__title"><span>Brightness:</span> {{frameInfo.Brightness}}</h4>
-                <h4 class="media-section__info__title"><span>Color:</span> {{frameInfo.Color}}</h4>
-                <h4 class="media-section__info__title"><span>DominatingColor:</span> {{frameInfo.DominatingColor}}</h4>
-                <h4 class="media-section__info__title"><span>FrameNumber:</span> {{frameInfo.FrameNumber}}</h4>
-                <h4 class="media-section__info__title"><span>Imgurl:</span> {{frameInfo.Imgurl}}</h4>
-                <h4 class="media-section__info__title"><span>Speed:</span> {{frameInfo.Speed}}</h4>
-                <h4 class="media-section__info__title"><span>Conversation:</span> {{frameInfo.conversation}}</h4>
-
-            </div> -->
-
-            <div ng-if="frameImage" class="media-section__info">
-                <img src="data/frame_images/{{movieImdbid}}/{{frameImage}}.jpg">
+            <div ng-if="frameInfo" class="media-section__info">
+                <img src="data/frame_images/{{movieImdbid}}/{{frameImage}}" onerror="this.src=''">
                 <h4 class="media-section__info__title"><span>Brightness:</span> {{frameInfo.Brightness}}</h4>
                 <h4 class="media-section__info__title"><span>Color:</span> {{frameInfo.Color}}</h4>
                 <h4 class="media-section__info__title"><span>DominatingColor:</span> {{frameInfo.DominatingColor}}</h4>
