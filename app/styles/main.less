@@ -11,9 +11,9 @@ VARIABLES
 /* GRID */
 @grid-xl: 40px;
 @grid-lg: 30px;
-@grid-md: 25px;
-@grid-sm: 16px;
-@grid-xs: 12px;
+@grid-md: 10px;
+@grid-sm: 5px;
+@grid-xs: 5px;
 /* COLOR */
 @color-light: #eeeeee;
 @color-dark: #021420;
@@ -146,7 +146,7 @@ body{
 
 		display: inline-block;
 		position: absolute;
-		right: 10%;
+		right: 11%;
 		margin: @grid-xs @grid-xs;
 		&__title{
 			span{
@@ -156,6 +156,9 @@ body{
 		&_nodes{
 			display: none;
 			margin-bottom: 0;
+		}
+		img {
+			width: 230px;
 		}
 	}
 	&_nodes{
@@ -283,12 +286,13 @@ D3
 	float: left;
     width: 120px;
     height: 330px;
-    text-align: center;
+    text-align: left;
     margin-right: 5px;
     margin-bottom: 20px;
     img {
     	width: 100%;
     	height: 180px;
+    	margin-bottom: 10px;
     }
 }
 

@@ -1,14 +1,15 @@
 <div class="media">
     <div class="menu">
-        <input type="text" class="form-control">
-        <button id="search" class="btn-primary">Search</button>
+        <input type="text" class="form-control" ng-model="searched_imdbid">
+        <button id="search" class="btn-primary" ng-click="search()">Search</button>
     </div>
     <div class="media-top">
-        <div class="media-top__blured blured" style="background-image: url({{mediaData.Posterurl}})"></div>
+        <div class="media-top__blured blured" style="background-image: url(posters/{{mediaData.Imdbid}}.jpg)"></div>
         
-        <div class="media-top__poster poster" style="background-image: url({{mediaData.Posterurl}})">
+        <div class="media-top__poster poster" style="background-image: url(posters/{{mediaData.Imdbid}}.jpg)">
             <div class="poster__border"></div>
         </div>
+
         <div class="media-top__info">
             <h1 class="media-top__info__title">{{mediaData.BisicInfo.Title}}</h1>
             <ul class="tags">
@@ -36,10 +37,10 @@
             <h4 class="media-section__info-title"><span>Description:</span> {{mediaData.BisicInfo.Plot}}</h4>
         </div>
 
-        <div class="media-section recommendation">
+        <div ng-if="mediaData.recommendation" class="media-section recommendation">
             <h2 class="media-section__title">Recommendation</h2>
 
-            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.recommendation">
+            <div class="recommendation-box" ng-repeat="recommendItem in mediaData.recommendation | limitTo: 11">
                 <img src="posters/{{ recommendItem.imdbid }}.jpg">
                 <a href="http://www.imdb.com/title/{{ recommendItem.imdbid }}" target="blank">{{ recommendItem.imdbid }}</a>
                 <br>
@@ -52,10 +53,10 @@
             </div>
         </div>
 
-        <div class="media-section">
+        <div ng-if="mediaData.FrameInfo" class="media-section">
 
             <h2 class="media-section__title">Frames</h2>
-            <div ng-if="frameInfo" class="media-section__info">
+            <!-- <div ng-if="frameInfo" class="media-section__info">
 
                 <h4 class="media-section__info__title"><span>Brightness:</span> {{frameInfo.Brightness}}</h4>
                 <h4 class="media-section__info__title"><span>Color:</span> {{frameInfo.Color}}</h4>
@@ -65,21 +66,34 @@
                 <h4 class="media-section__info__title"><span>Speed:</span> {{frameInfo.Speed}}</h4>
                 <h4 class="media-section__info__title"><span>Conversation:</span> {{frameInfo.conversation}}</h4>
 
+            </div> -->
+
+            <div ng-if="frameImage" class="media-section__info">
+                <img src="data/frame_images/{{movieImdbid}}/{{frameImage}}.jpg">
+                <h4 class="media-section__info__title"><span>Brightness:</span> {{frameInfo.Brightness}}</h4>
+                <h4 class="media-section__info__title"><span>Color:</span> {{frameInfo.Color}}</h4>
+                <h4 class="media-section__info__title"><span>DominatingColor:</span> {{frameInfo.DominatingColor}}</h4>
+                <h4 class="media-section__info__title"><span>Speed:</span> {{frameInfo.Speed}}</h4>
+                <h4 class="media-section__info__title"><span>Conversation:</span> {{frameInfo.conversation}}</h4>
+                
+
             </div>
+
+
             <div class="frames">
                 <div class="frames__container" style="width: {{(mediaData.FrameInfo.length * 1) + 300}}px">
                     
                     <div class="frames__container__wrap">
-                        <div class="frames__container__wrap__item" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" style="background-color: rgb({{item.Color}}); height: {{mainHeight + item.Speed / 10}}px;"></div>
+                        <div class="frames__container__wrap__item" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-mouseover="updateBox(item)" style="background-color: rgb({{item.Color}}); height: {{mainHeight + item.Speed / 10}}px;"></div>
                     </div>
                     <div class="frames__container__wrap">
-                        <div class="frames__container__wrap__item frames__container__wrap__item_conversation" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-class="{'frames__container__wrap__item_conversation_true' : item.conversation == '1'}"></div>
+                        <div class="frames__container__wrap__item frames__container__wrap__item_conversation" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-mouseover="updateBox(item)" ng-class="{'frames__container__wrap__item_conversation_true' : item.conversation == '1'}"></div>
                     </div>
                     <div class="frames__container__wrap">
-                        <div class="frames__container__wrap__item frames__container__wrap__item_brightness" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" style="background-color: rgb({{item.Brightness}}, {{item.Brightness}}, {{item.Brightness}})"></div>
+                        <div class="frames__container__wrap__item frames__container__wrap__item_brightness" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-mouseover="updateBox(item)" style="background-color: rgb({{item.Brightness}}, {{item.Brightness}}, {{item.Brightness}})"></div>
                     </div>
                     <div class="frames__container__wrap">
-                        <div class="frames__container__wrap__item frames__container__wrap__item_dominatingcolor" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-class="{'frames__container__wrap__item_dominatingcolor_red' : item.DominatingColor == 'R', 'frames__container__wrap__item_dominatingcolor_green' : item.DominatingColor == 'G', 'frames__container__wrap__item_dominatingcolor_blue' : item.DominatingColor == 'B'}"></div>
+                        <div class="frames__container__wrap__item frames__container__wrap__item_dominatingcolor" ng-repeat="item in mediaData.FrameInfo" ng-click="updateBox(item)" ng-mouseover="updateBox(item)" ng-class="{'frames__container__wrap__item_dominatingcolor_red' : item.DominatingColor == 'R', 'frames__container__wrap__item_dominatingcolor_green' : item.DominatingColor == 'G', 'frames__container__wrap__item_dominatingcolor_blue' : item.DominatingColor == 'B'}"></div>
                     </div>
 
                 </div>
@@ -87,7 +101,7 @@
 
         </div>
 
-        <div class="media-section media-section_nodes">
+        <div ng-if="mediaData.KeywordsBubble.nodes.length != 0" class="media-section media-section_nodes">
             <h2 class="media-section__title">Nodes (Bawls)</h2>
             <div id="nodeInfo" class="media-section__info media-section__info_nodes">
                 <h4 id="index" class="media-section__info__title"></h4>

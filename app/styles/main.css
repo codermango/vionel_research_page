@@ -6056,7 +6056,7 @@ body {
   margin-bottom: 40px;
 }
 .media-section__title {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   color: #eeeeee;
 }
 .media-section__info-title {
@@ -6071,13 +6071,13 @@ body {
 .media-section__info {
   color: #021420;
   background-color: rgba(238, 238, 238, 0.8);
-  padding: 16px 25px;
+  padding: 5px 10px;
   border-radius: 2px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   display: inline-block;
   position: absolute;
-  right: 10%;
-  margin: 12px 12px;
+  right: 11%;
+  margin: 5px 5px;
 }
 .media-section__info__title span {
   font-weight: 600;
@@ -6085,6 +6085,9 @@ body {
 .media-section__info_nodes {
   display: none;
   margin-bottom: 0;
+}
+.media-section__info img {
+  width: 230px;
 }
 .media-section_nodes svg {
   width: 100%;
@@ -6208,13 +6211,14 @@ D3
   float: left;
   width: 120px;
   height: 330px;
-  text-align: center;
+  text-align: left;
   margin-right: 5px;
   margin-bottom: 20px;
 }
 .recommendation-box img {
   width: 100%;
   height: 180px;
+  margin-bottom: 10px;
 }
 .recommendation {
   overflow: hidden;

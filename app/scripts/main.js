@@ -47,22 +47,32 @@ CONTROLLERS
     $scope.test = 'fdfdsfs';
 }])
 
-.controller('MediaCtrl', ['$scope', '$http', 'webtest', '$routeParams', function ($scope, $http, webtest, $routeParams) {
+.controller('MediaCtrl', ['$scope', '$http', 'webtest', '$routeParams', '$location', function ($scope, $http, webtest, $routeParams, $location) {
 	
+    $scope.search = function() {
+        var imdbid = $scope.searched_imdbid.trim();
+        if (imdbid == undefined) {
+            alert("Please input a movie imdb id!");
+            return;
+        }
+        $location.path('/media/' + imdbid)
+    }
 
     console.log('$routeParams: ',$routeParams.jsonLink);
 	$scope.mainHeight = 30;
 
     $scope.updateBox = function(item){
-        // console.log('item: ', item);
+
         $scope.frameInfo = item;
+        $scope.frameImage = item.Imgurl;
+        $scope.movieImdbid = $routeParams.jsonLink;
     };
 
-	webtest.fetch('data/'+ $routeParams.jsonLink +'.json').then(function(data) {
+	webtest.fetch('data/profile_json/'+ $routeParams.jsonLink +'.json').then(function(data) {
         $scope.mediaData = data;
-        console.log('$scope.mediaData: ', $scope.mediaData);
+        console.log('$scope.mediaData: ', $scope.mediaData.KeywordsBubble.nodes.length);
 
-        $scope.tags = data.BisicInfo.Genre.split(", ");
+        $scope.tags = data.BisicInfo.Genre.split(",");
         $scope.startNodes(data.KeywordsBubble);
         
         var RGBData = [
@@ -70,12 +80,16 @@ CONTROLLERS
         {"value":data.RGB.G}, 
         {"value":data.RGB.B},
         {"value":data.RGB.Rest}
-        ],
-        BrightnessData = [
+        ];
+        var BrightnessData = [
         {"value":data.Brightness.Bright}, 
         {"value":data.Brightness.Dark}, 
         {"value":data.Brightness.Medium}
         ];
+        var env = data["Environment"];
+
+        
+        console.log("Environment: ", env);
         console.log('RGBData: ',RGBData);
         $scope.startPies(RGBData, ["#FF3056", "#4AD663", "#59C7FC", '#eeeeee']);
         $scope.startPies(BrightnessData, ["#eeeeee", "#222222", "#666666"]);
@@ -124,6 +138,19 @@ CONTROLLERS
 
         }) 
 
+        // var poster = d3.select("body").append("div").attr("class", "node-poster")
+        // node.on("mouseover", function(d) {
+        //     var imdbid = d.Imdbid
+        //     var group = d.group
+        //     if (group != 0) {
+        //         poster.html("<img src='../posters/" + imdbid + ".jpg'>")
+        //           .style("left", (d3.event.pageX) + "px")
+        //           .style("top", (d3.event.pageY) + "px"); 
+        //     } 
+        // });
+
+
+
         node.append("title")
         .text(function(d) { return d.title; });
 
@@ -141,11 +168,11 @@ CONTROLLERS
     
 
     $scope.startPies = function (data, colorList) {
-        var w = 80,                        //width
-        h = 80,                            //height
-        r = 40,                            //radius
+        var w = 80;                        //width
+        var h = 80;                            //height
+        var r = 40;                            //radius
         // color = d3.scale.category20c();     //builtin range of colors
-        color = d3.scale.ordinal()
+        var color = d3.scale.ordinal()
         .range(colorList);
 
         var vis = d3.select(".pies")
